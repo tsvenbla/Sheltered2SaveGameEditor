@@ -3,6 +3,8 @@ using Microsoft.UI.Xaml.Navigation;
 using Microsoft.Windows.AppNotifications.Builder;
 using Microsoft.Windows.AppNotifications;
 using System;
+using Microsoft.UI.Xaml.Controls;
+using Sheltered2SaveGameEditor.Pages;
 
 namespace Sheltered2SaveGameEditor;
 
@@ -36,6 +38,7 @@ public sealed partial class App : Application
         {
             ExtendsContentIntoTitleBar = true
         };
+
         StartupWindow.Activate();
     }
 
