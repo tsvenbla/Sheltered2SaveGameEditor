@@ -59,7 +59,9 @@
                         Grid.RowSpan="2"
                         Grid.Column="1"
                         IsTabStop="False"
-                        IsTitleBarAutoPaddingEnabled="True">
+                        IsTitleBarAutoPaddingEnabled="True"
+                        SelectionChanged="OnNavigationViewSelectionChanged"
+                        IsBackEnabled="{x:Bind RootFrame.CanGoBack, Mode=OneWay}">
 
             <NavigationView.Resources>
                 <Thickness x:Key="NavigationViewContentMargin">0,48,0,0</Thickness>
@@ -80,30 +82,30 @@
 
             <!-- Main navigation menu items -->
             <NavigationView.MenuItems>
-                <NavigationViewItem x:Name="Home" 
+                <NavigationViewItem Tag="Home" 
                                     Content="Home"
                                     Icon="Home" />
                 <NavigationViewItemSeparator />
-                <NavigationViewItem x:Name="Characters"
+                <NavigationViewItem Tag="Characters"
                                     Content="Characters" 
                                     Icon="People" />
-                <NavigationViewItem x:Name="Pets"
+                <NavigationViewItem Tag="Pets"
                                     Content="Pets" 
                                     Icon="Emoji" />
-                <NavigationViewItem x:Name="Inventory"
+                <NavigationViewItem Tag="Inventory"
                                     Content="Inventory" 
                                     Icon="Shop" />
-                <NavigationViewItem x:Name="Crafting"
+                <NavigationViewItem Tag="Crafting"
                                     Content="Crafting"
                                     Icon="Repair" />
-                <NavigationViewItem x:Name="Factions"
+                <NavigationViewItem Tag="Factions"
                                     Content="Factions" 
                                     Icon="Flag" />
             </NavigationView.MenuItems>
 
             <!-- Footer navigation items -->
             <NavigationView.FooterMenuItems>
-                <NavigationViewItem x:Name="Donate"
+                <NavigationViewItem Tag="Donate"
                                     Content="Donate">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xEB52;" />

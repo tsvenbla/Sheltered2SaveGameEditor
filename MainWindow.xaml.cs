@@ -3,6 +3,8 @@ using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
+using Sheltered2SaveGameEditor.Helpers;
+using Sheltered2SaveGameEditor.Pages;
 using System;
 
 namespace Sheltered2SaveGameEditor;
@@ -15,7 +17,22 @@ public sealed partial class MainWindow : Window
     {
         InitializeComponent();
         CustomizeTitleBar();
+
+        // Set up navigation
         RootFrameInstance = RootFrame;
+        _ = RootFrameInstance.Navigate(typeof(Pages.HomePage));
+
+        // Assign event handler for navigation view
+        NavigationViewControl.SelectionChanged += OnNavigationViewSelectionChanged;
+        NavigationViewControl.SelectedItem = NavigationViewControl.MenuItems[0];
+    }
+
+    private void OnNavigationViewSelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+    {
+        if (args.SelectedItem is NavigationViewItem item && item.Tag is string pageTag)
+        {
+            _ = NavigationHelper.NavigateByNavItemTag(pageTag);
+        }
     }
 
     private void CustomizeTitleBar()
@@ -25,13 +42,8 @@ public sealed partial class MainWindow : Window
         WindowId windowId = Win32Interop.GetWindowIdFromWindow(hWnd);
         AppWindow appWindow = AppWindow.GetFromWindowId(windowId);
 
-        // Extend content into the title bar
         ExtendsContentIntoTitleBar = true;
-
-        // Access the AppWindowTitleBar
         AppWindowTitleBar titleBar = appWindow.TitleBar;
-
-        // Set the preferred height option to Tall
         titleBar.PreferredHeightOption = TitleBarHeightOption.Tall;
     }
 
