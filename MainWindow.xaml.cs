@@ -4,7 +4,6 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using Sheltered2SaveGameEditor.Helpers;
-using Sheltered2SaveGameEditor.Pages;
 using System;
 
 namespace Sheltered2SaveGameEditor;
@@ -45,6 +44,7 @@ public sealed partial class MainWindow : Window
         ExtendsContentIntoTitleBar = true;
         AppWindowTitleBar titleBar = appWindow.TitleBar;
         titleBar.PreferredHeightOption = TitleBarHeightOption.Tall;
+        Title = Application.Current.Resources["AppTitle"] as string;
     }
 
     /// <summary>

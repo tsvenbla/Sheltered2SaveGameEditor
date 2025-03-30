@@ -5,8 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Title="Sheltered 2 - Save Game Editor">
+    mc:Ignorable="d">
 
     <Window.SystemBackdrop>
         <MicaBackdrop />
@@ -14,20 +13,11 @@
 
     <Grid>
         <Grid.Resources>
-            <!-- Navigation view styling -->
             <Thickness x:Key="NavigationViewContentMargin">0,48,0,0</Thickness>
             <Thickness x:Key="NavigationViewMinimalContentMargin">0,48,0,0</Thickness>
             <Thickness x:Key="NavigationViewContentGridBorderThickness">1,1,0,0</Thickness>
             <CornerRadius x:Key="NavigationViewContentGridCornerRadius">8,0,0,0</CornerRadius>
-
-            <!-- App bar styling -->
-            <Style x:Key="AppTitleBarStyle" TargetType="StackPanel">
-                <Setter Property="Orientation" Value="Horizontal" />
-                <Setter Property="VerticalAlignment" Value="Center" />
-                <Setter Property="Margin" Value="48,0,0,0" />
-            </Style>
         </Grid.Resources>
-
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition />
@@ -39,18 +29,18 @@
 
         <!-- Custom title bar -->
         <Border Grid.Column="1"
-                Height="{Binding ElementName=NavigationViewControl, Path=CompactPaneLength}"
+                Height="{x:Bind NavigationViewControl.CompactPaneLength, Mode=OneWay}"
                 Margin="48,0,0,0"
                 VerticalAlignment="Stretch">
                 <StackPanel VerticalAlignment="Stretch" Orientation="Horizontal">
                     <Image
-                        Source="/Assets/AppIcon.ico"
+                        Source="{StaticResource AppIcon}"
                         VerticalAlignment="Center"
                         Width="18" />
                     <TextBlock
                         Margin="12,0,0,0"
                         Style="{StaticResource CaptionTextBlockStyle}"
-                        Text="Sheltered 2 - Save Game Editor"
+                        Text="{StaticResource AppTitle}"
                         VerticalAlignment="Center" />
                 </StackPanel>
             </Border>
