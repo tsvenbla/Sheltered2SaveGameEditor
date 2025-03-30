@@ -29,8 +29,7 @@ public static class NavigationHelper
         Type? pageType = navigationItemTag switch
         {
             "Home" => typeof(HomePage),
-            // Add mappings for other navigation items as their pages are created
-            // "Characters" => typeof(CharactersPage),
+            "Characters" => typeof(CharactersPage),
             // "Pets" => typeof(PetsPage),
             // "Inventory" => typeof(InventoryPage),
             // "Crafting" => typeof(CraftingPage),

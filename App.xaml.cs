@@ -23,8 +23,6 @@ public sealed partial class App : Application
     public App()
     {
         InitializeComponent();
-
-        // Handle application exceptions
         UnhandledException += HandleExceptions;
     }
 

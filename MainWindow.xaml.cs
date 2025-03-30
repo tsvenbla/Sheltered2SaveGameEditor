@@ -23,6 +23,7 @@ public sealed partial class MainWindow : Window
 
         // Assign event handler for navigation view
         NavigationViewControl.SelectionChanged += OnNavigationViewSelectionChanged;
+        NavigationViewControl.BackRequested += (s, e) => NavigationHelper.GoBack();
         NavigationViewControl.SelectedItem = NavigationViewControl.MenuItems[0];
     }
 
