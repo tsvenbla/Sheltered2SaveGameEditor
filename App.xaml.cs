@@ -1,7 +1,6 @@
 ﻿using Microsoft.UI.Xaml;
 using Microsoft.Windows.AppNotifications;
 using Microsoft.Windows.AppNotifications.Builder;
-using Sheltered2SaveGameEditor.Pages;
 using System;
 using System.Diagnostics;
 
@@ -36,8 +35,6 @@ public sealed partial class App : Application
         // Create and activate the main window
         StartupWindow = new MainWindow();
         StartupWindow.Activate();
-
-        _ = (MainWindow.RootFrameInstance?.Navigate(typeof(HomePage)));
     }
 
     /// <summary>

@@ -12,29 +12,12 @@
     </Window.SystemBackdrop>
 
     <Grid>
-        <Grid.Resources>
-            <Thickness x:Key="NavigationViewContentMargin">0,48,0,0</Thickness>
-            <Thickness x:Key="NavigationViewMinimalContentMargin">0,48,0,0</Thickness>
-            <Thickness x:Key="NavigationViewContentGridBorderThickness">1,1,0,0</Thickness>
-            <CornerRadius x:Key="NavigationViewContentGridCornerRadius">8,0,0,0</CornerRadius>
-        </Grid.Resources>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-
         <!-- Custom title bar -->
-        <Border Grid.Column="1"
-                Height="{x:Bind NavigationViewControl.CompactPaneLength, Mode=OneWay}"
-                Margin="48,0,0,0"
-                VerticalAlignment="Stretch">
+        <Border Margin="48,16,0,0"
+                VerticalAlignment="Top">
                 <StackPanel VerticalAlignment="Stretch" Orientation="Horizontal">
                     <Image
-                        Source="{StaticResource AppIcon}"
+                        Source="/Assets/AppIcon.ico"
                         VerticalAlignment="Center"
                         Width="18" />
                     <TextBlock
@@ -46,22 +29,16 @@
             </Border>
         <!-- Main navigation view -->
         <NavigationView x:Name="NavigationViewControl"
-                        Grid.RowSpan="2"
-                        Grid.Column="1"
                         IsTabStop="False"
                         IsTitleBarAutoPaddingEnabled="True"
                         SelectionChanged="OnNavigationViewSelectionChanged"
+                        BackRequested="OnNavigationViewBackRequested"
                         IsBackEnabled="{x:Bind RootFrame.CanGoBack, Mode=OneWay}">
 
-            <NavigationView.Resources>
-                <Thickness x:Key="NavigationViewContentMargin">0,48,0,0</Thickness>
-                <Thickness x:Key="NavigationViewMinimalContentMargin">0,48,0,0</Thickness>
-                <Thickness x:Key="NavigationViewContentGridBorderThickness">1,1,0,0</Thickness>
-                <CornerRadius x:Key="NavigationViewContentGridCornerRadius">8,0,0,0</CornerRadius>
-            </NavigationView.Resources>
-
             <ScrollView>
-                <Frame x:Name="RootFrame" NavigationFailed="OnNavigationFailed">
+                <Frame x:Name="RootFrame"
+                       Navigated="OnNavigated"
+                       NavigationFailed="OnNavigationFailed">
                     <Frame.ContentTransitions>
                         <TransitionCollection>
                             <NavigationThemeTransition/>

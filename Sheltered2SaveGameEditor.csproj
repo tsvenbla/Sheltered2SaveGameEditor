@@ -14,7 +14,12 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Pages\CharactersPage.xaml" />
+    <None Remove="Pages\CraftingPage.xaml" />
+    <None Remove="Pages\DonatePage.xaml" />
+    <None Remove="Pages\FactionsPage.xaml" />
     <None Remove="Pages\HomePage.xaml" />
+    <None Remove="Pages\InventoryPage.xaml" />
+    <None Remove="Pages\PetsPage.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -52,6 +57,34 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Pages\HomePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Helpers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\DonatePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\PetsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\InventoryPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\FactionsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Pages\CraftingPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
