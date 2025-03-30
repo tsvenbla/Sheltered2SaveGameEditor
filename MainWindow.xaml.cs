@@ -16,23 +16,7 @@ public sealed partial class MainWindow : Window
     {
         InitializeComponent();
         CustomizeTitleBar();
-
-        // Set up navigation
         RootFrameInstance = RootFrame;
-        _ = RootFrameInstance.Navigate(typeof(Pages.HomePage));
-
-        // Assign event handler for navigation view
-        NavigationViewControl.SelectionChanged += OnNavigationViewSelectionChanged;
-        NavigationViewControl.BackRequested += (s, e) => NavigationHelper.GoBack();
-        NavigationViewControl.SelectedItem = NavigationViewControl.MenuItems[0];
-    }
-
-    private void OnNavigationViewSelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
-    {
-        if (args.SelectedItem is NavigationViewItem item && item.Tag is string pageTag)
-        {
-            _ = NavigationHelper.NavigateByNavItemTag(pageTag);
-        }
     }
 
     private void CustomizeTitleBar()
