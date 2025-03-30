@@ -28,32 +28,38 @@
             </Style>
         </Grid.Resources>
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <!-- Custom title bar -->
-        <Border Grid.Row="0" Height="48">
-            <StackPanel Style="{StaticResource AppTitleBarStyle}">
-                <Image Source="/Assets/AppIcon.ico"
-                       VerticalAlignment="Center"
-                       Width="16" Height="16"
-                       Margin="8,0,4,0"/>
-                <TextBlock Text="{StaticResource AppTitleName}"
-                           Margin="12,0,0,0" 
-                           VerticalAlignment="Center"
-                           Style="{StaticResource CaptionTextBlockStyle}"/>
-            </StackPanel>
-        </Border>
+        <Border Grid.Column="1"
+                Height="{Binding ElementName=NavigationViewControl, Path=CompactPaneLength}"
+                Margin="48,0,0,0"
+                VerticalAlignment="Stretch">
+                <StackPanel VerticalAlignment="Stretch" Orientation="Horizontal">
+                    <Image
+                        Source="/Assets/AppIcon.ico"
+                        VerticalAlignment="Center"
+                        Width="18" />
+                    <TextBlock
+                        Margin="12,0,0,0"
+                        Style="{StaticResource CaptionTextBlockStyle}"
+                        Text="Sheltered 2 - Save Game Editor"
+                        VerticalAlignment="Center" />
+                </StackPanel>
+            </Border>
         <!-- Main navigation view -->
-        <NavigationView Grid.Row="1"
-                        IsBackEnabled="True"
-                        PaneDisplayMode="Auto">
-
-            <!--SelectionChanged="OnNavigationViewSelectionChanged" 
-                        BackRequested="OnNavigationViewBackRequested"
-                        IsBackEnabled="{x:Bind ViewModel.IsNavigateBackEnabled, Mode=OneWay}"-->
+        <NavigationView x:Name="NavigationViewControl"
+                        Grid.RowSpan="2"
+                        Grid.Column="1"
+                        IsTabStop="False"
+                        IsTitleBarAutoPaddingEnabled="True">
 
             <NavigationView.Resources>
                 <Thickness x:Key="NavigationViewContentMargin">0,48,0,0</Thickness>
@@ -63,7 +69,7 @@
             </NavigationView.Resources>
 
             <ScrollView>
-                <Frame>
+                <Frame x:Name="RootFrame" NavigationFailed="OnNavigationFailed">
                     <Frame.ContentTransitions>
                         <TransitionCollection>
                             <NavigationThemeTransition/>
@@ -74,31 +80,31 @@
 
             <!-- Main navigation menu items -->
             <NavigationView.MenuItems>
-                <NavigationViewItem Content="Home" 
-                                    Tag="Home" 
+                <NavigationViewItem x:Name="Home" 
+                                    Content="Home"
                                     Icon="Home" />
                 <NavigationViewItemSeparator />
-                <NavigationViewItem Content="Characters" 
-                                    Tag="Characters" 
+                <NavigationViewItem x:Name="Characters"
+                                    Content="Characters" 
                                     Icon="People" />
-                <NavigationViewItem Content="Pets" 
-                                    Tag="Pets" 
+                <NavigationViewItem x:Name="Pets"
+                                    Content="Pets" 
                                     Icon="Emoji" />
-                <NavigationViewItem Content="Inventory" 
-                                    Tag="Inventory" 
+                <NavigationViewItem x:Name="Inventory"
+                                    Content="Inventory" 
                                     Icon="Shop" />
-                <NavigationViewItem Content="Crafting" 
-                                    Tag="Crafting" 
+                <NavigationViewItem x:Name="Crafting"
+                                    Content="Crafting"
                                     Icon="Repair" />
-                <NavigationViewItem Content="Factions" 
-                                    Tag="Factions" 
+                <NavigationViewItem x:Name="Factions"
+                                    Content="Factions" 
                                     Icon="Flag" />
             </NavigationView.MenuItems>
 
             <!-- Footer navigation items -->
             <NavigationView.FooterMenuItems>
-                <NavigationViewItem Content="Donate" 
-                                    Tag="Donate">
+                <NavigationViewItem x:Name="Donate"
+                                    Content="Donate">
                     <NavigationViewItem.Icon>
                         <FontIcon Glyph="&#xEB52;" />
                     </NavigationViewItem.Icon>
