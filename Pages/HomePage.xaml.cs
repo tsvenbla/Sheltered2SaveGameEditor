@@ -2,7 +2,8 @@ using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
 using System.IO;
-using Windows.Storage.Pickers;
+using System.Threading;
+using Windows.Storage;
 using WinRT.Interop;
 
 namespace Sheltered2SaveGameEditor.Pages;
@@ -16,28 +17,29 @@ public sealed partial class HomePage : Page
 
     private async void LoadFileButton_Click(object sender, RoutedEventArgs e)
     {
+        LoadFileButton.IsEnabled = false;
         LoadFileTextBlock.Text = "Selecting a file...";
+
         try
         {
-            FileOpenPicker picker = new();
-
-            InitializeWithWindow.Initialize(picker, WindowNative.GetWindowHandle(App.StartupWindow));
-            string defaultFolderPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"..\LocalLow\Unicube\Sheltered2");
-            _ = await Windows.Storage.StorageFolder.GetFolderFromPathAsync(defaultFolderPath);
-
-            picker.FileTypeFilter.Add(".dat");
-
-            Windows.Storage.StorageFile? file = await picker.PickSingleFileAsync();
-            if (file is not null)
+            StorageFile? file = await Helpers.FileHelper.PickFileAsync(CancellationToken.None);
+            if (file is null)
             {
-                // Handle the selected file here
-                // e.g., Load file content, parse data, navigate to another page, etc.
+                LoadFileTextBlock.Text = "No file selected.";
+                LoadFileButton.IsEnabled = true;
+                return;
             }
-            SaveFileButton.IsEnabled = true;
+
+            LoadFileTextBlock.Text = $"Loading {file.Name}...";
+            string decryptedContent = await Helpers.FileHelper.LoadAndDecryptSaveFileAsync(file);
         }
-        catch (Exception ex)
+        catch (Exception ex) when (ex is FileNotFoundException or InvalidDataException)
         {
-            LoadFileTextBlock.Text = $"Error: {ex.Message}";
+            LoadFileTextBlock.Text = $"An error occurred while loading the file: {ex.Message}";
+        }
+        finally
+        {
+            LoadFileButton.IsEnabled = true;
         }
     }
 

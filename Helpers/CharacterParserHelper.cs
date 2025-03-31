@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Sheltered2SaveGameEditor.Models;
+using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 using System.Xml.Linq;

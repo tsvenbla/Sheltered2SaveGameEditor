@@ -1,6 +1,7 @@
 ﻿using Microsoft.UI.Xaml;
 using Microsoft.Windows.AppNotifications;
 using Microsoft.Windows.AppNotifications.Builder;
+using Sheltered2SaveGameEditor.Helpers;
 using System;
 using System.Diagnostics;
 
@@ -14,7 +15,9 @@ public sealed partial class App : Application
     /// <summary>
     /// Gets the initial window created for this app.
     /// </summary>
-    public static Window? StartupWindow { get; private set; }
+    internal static Window? StartupWindow { get; private set; }
+
+    internal static AppDataHelper? CurrentSaveData { get; set; }
 
     /// <summary>
     /// Initializes the singleton Application object. This is the first line of authored code
