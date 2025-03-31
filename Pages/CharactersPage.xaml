@@ -8,9 +8,169 @@
     mc:Ignorable="d"
     NavigationCacheMode="Enabled">
 
-    <Grid>
+    <StackPanel Margin="36" Spacing="24">
+        <!-- Title -->
         <TextBlock Text="Characters" 
-           Style="{StaticResource TitleTextBlockStyle}" 
-           Margin="0,0,0,24"/>
-    </Grid>
+                   Style="{StaticResource TitleTextBlockStyle}" 
+                   Margin="0,0,0,24"/>
+
+        <!-- ComboBox for selecting a character -->
+        <ComboBox x:Name="CharacterComboBox"
+                  Header="Select a character from the drop-down menu and edit the relevant fields."
+                  PlaceholderText="Select a character" />
+
+        <!-- Basics Section -->
+        <Border Style="{StaticResource CharacterBorderStyle}">
+            <StackPanel Spacing="12">
+                <TextBlock Text="Basics"
+                           Style="{StaticResource SubtitleTextBlockStyle}"/>
+                <TextBox x:Name="FirstNameTextBox"
+                         Width="250"
+                         HorizontalAlignment="Left"
+                         Header="First name:"
+                         PlaceholderText="Jane"
+                         MaxLength="15" />
+                <TextBox x:Name="LastNameTextBox"
+                         Width="250"
+                         HorizontalAlignment="Left"
+                         Header="Last name:"
+                         PlaceholderText="Doe"
+                         MaxLength="15" />
+                <CheckBox Content="Interacting" />
+                <CheckBox Content="Interacting with object" />
+            </StackPanel>
+        </Border>
+
+        <!-- Health and Conditions Section -->
+        <Border Style="{StaticResource CharacterBorderStyle}">
+            <StackPanel Spacing="12">
+                <TextBlock Text="Health and Conditions"
+                           Style="{StaticResource SubtitleTextBlockStyle}"/>
+                <NumberBox x:Name="CurrentHealthNumberBox"
+                           Width="250"
+                           HorizontalAlignment="Left"
+                           Header="Current health:"
+                           Minimum="1"
+                           Maximum="10000"
+                           SpinButtonPlacementMode="Inline"
+                           SmallChange="10"
+                           LargeChange="100"/>
+                <NumberBox x:Name="MaxHealthNumberBox"
+                           Width="250"
+                           HorizontalAlignment="Left"
+                           Header="Maximum health:"
+                           Minimum="1"
+                           Maximum="10000"
+                           SpinButtonPlacementMode="Inline"
+                           SmallChange="10"
+                           LargeChange="100"/>
+                <CheckBox Content="Has been defibrillated"/>
+                <CheckBox Content="Is passed out"/>
+                <CheckBox Content="Is unconscious"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Stats Section -->
+        <Border Style="{StaticResource CharacterBorderStyle}">
+            <StackPanel Orientation="Vertical" Spacing="12">
+                <TextBlock Text="Stats"
+                           Style="{StaticResource SubtitleTextBlockStyle}"/>
+                <TextBlock TextWrapping="Wrap"
+                           Margin="0,0,0,12"
+                           Text="Each stat has a current and maximum level, referred to as the 'cap.' The current level determines the cap and cannot be directly modified to maintain game logic. For levels 1 to 5, the cap increases by 2 points for each level. Once a level exceeds 5, the cap is always 20." />
+                <!-- Maximize Stats Button uses command binding -->
+                <Button x:Name="MaxStatsButton" 
+                        Content="Maximise all stats" />
+                <!-- Feedback message -->
+                <TextBlock Text="Feedback text" Margin="0,4,0,0" Foreground="Gray"/>
+                <Grid RowSpacing="12" ColumnSpacing="12">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Row 1: Levels -->
+                    <TextBlock Grid.Row="0" Grid.Column="0" TextWrapping="Wrap" Text="Current level:"
+                               VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                    <NumberBox Grid.Row="0" Grid.Column="1"
+                               Header="&#128170; Strength"
+                               Minimum="1"
+                               Maximum="20"
+                               SpinButtonPlacementMode="Compact"
+                               SmallChange="1"/>
+                    <NumberBox Grid.Row="0" Grid.Column="2"
+                               Header="&#127939; Dexterity"
+                               Minimum="1"
+                               Maximum="20"
+                               SpinButtonPlacementMode="Compact"
+                               SmallChange="1"/>
+                    <NumberBox Grid.Row="0" Grid.Column="3"
+                               Header="&#129504; Intelligence"
+                               Minimum="1"
+                               Maximum="20"
+                               SpinButtonPlacementMode="Compact"
+                               SmallChange="1"/>
+                    <NumberBox Grid.Row="0" Grid.Column="4"
+                               Header="&#128068; Charisma"
+                               Minimum="1"
+                               Maximum="20"
+                               SpinButtonPlacementMode="Compact"
+                               SmallChange="1"/>
+                    <NumberBox Grid.Row="0" Grid.Column="5"
+                               Header="&#128064; Perception"
+                               Minimum="1"
+                               Maximum="20"
+                               SpinButtonPlacementMode="Compact"
+                               SmallChange="1"/>
+                    <NumberBox Grid.Row="0" Grid.Column="6"
+                               Header="&#10084; Fortitude"
+                               Minimum="1"
+                               Maximum="20"
+                               SpinButtonPlacementMode="Compact"
+                               SmallChange="1"/>
+
+                    <!-- Row 2: Caps -->
+                    <TextBlock Grid.Row="1" Grid.Column="0" TextWrapping="Wrap" Text="Maximum level:" 
+                               VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                    <NumberBox IsEnabled="False" Grid.Row="1" Grid.Column="1"/>
+                    <NumberBox IsEnabled="False" Grid.Row="1" Grid.Column="2"/>
+                    <NumberBox IsEnabled="False" Grid.Row="1" Grid.Column="3"/>
+                    <NumberBox IsEnabled="False" Grid.Row="1" Grid.Column="4"/>
+                    <NumberBox IsEnabled="False" Grid.Row="1" Grid.Column="5"/>
+                    <NumberBox IsEnabled="False" Grid.Row="1" Grid.Column="6"/>
+                </Grid>
+            </StackPanel>
+        </Border>
+        <Border Style="{StaticResource CharacterBorderStyle}">
+            <StackPanel Spacing="12">
+                <TextBlock Text="Skills"
+                           Style="{StaticResource SubtitleTextBlockStyle}"/>
+                <SelectorBar x:Name="SelectorBar">
+                    <!--                    SelectionChanged="SelectorBar_SelectionChanged"-->
+                    <SelectorBarItem x:Name="SelectorBarItemStrength" 
+                     Text="&#128170; Strength" IsSelected="True"/>
+                    <SelectorBarItem x:Name="SelectorBarItemDexterity" 
+                     Text="&#127939; Dexterity"/>
+                    <SelectorBarItem x:Name="SelectorBarItemIntelligence" 
+                     Text="&#129504; Intelligence"/>
+                    <SelectorBarItem x:Name="SelectorBarItemCharisma" 
+                     Text="&#128068; Charisma"/>
+                    <SelectorBarItem x:Name="SelectorBarItemPerception" 
+                     Text="&#128064; Perception"/>
+                    <SelectorBarItem x:Name="SelectorBarItemFortitude" 
+                     Text="&#10084; Fortitude"/>
+                </SelectorBar>
+                <Frame x:Name="SkillsContentFrame" IsNavigationStackEnabled="False" />
+            </StackPanel>
+        </Border>
+    </StackPanel>
 </Page>
